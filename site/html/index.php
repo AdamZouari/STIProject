@@ -30,15 +30,18 @@
 
   <body>
 
-  <?php include "connect.php"; ?>
+ <?php include "connect.php"; ?>
 
     <div class="container">
 
       <div id="login">
 
         <?php 
-          if (isset($POST[])) {
-            # code...
+          if (isset($_POST["username"]) && isset($_POST["password"] ) ) {
+            
+
+
+
           }
 
         ?>
@@ -48,7 +51,7 @@
           <fieldset class="clearfix">
 
             <p><span class="fontawesome-user"></span><input type="text" name="username" value="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fontawesome-lock"></span><input type="password" name="password"  value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><span class="fontawesome-lock"></span><input type="password" name="password" value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
             <p><input type="submit" value="Sign In"></p>
 
           </fieldset>
