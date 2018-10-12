@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -21,15 +22,32 @@
       <div id="login">
         <?php 
           if (isset($_POST["username"]) && isset($_POST["password"]) ) {
-            if (!empty($_POST["username"])) {
-              
+            $req = $db->prepare('
+              SELECT *
+              FROM User
+              WHERE username = :username AND password = :password
+            ');
+            $req->execute( array(
+              'username' => $_POST['username'],
+              'password' => $_POST['password']
+
+            ));
+
+            $result = $req->fetch();
+            if(empty($result)) {
+              echo("<h1>WRONG CREDENTIALS</h1>");
+            }
+            else 
+            {
+              $_SESSION['user'] = $result['username'];
+              header('Location: mail.php');
             }
           }
         ?>
         <form action="index.php" method="post">
           <fieldset class="clearfix">
-            <p><span class="fontawesome-user"></span><input required type="text" name="username" placeholder="Username" onBlur="if(this.value == '') this.value = 'Username'" onFocus="if(this.value == 'Username') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-            <p><span class="fontawesome-lock"></span><input type="password" name="password" value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+            <p><span class="fontawesome-user"></span><input type="text" name="username" placeholder="Username" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
+            <p><span class="fontawesome-lock"></span><input type="password" name="password" placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
             <p><input type="submit" value="Sign In"></p>
           </fieldset>
         </form>
