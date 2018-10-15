@@ -34,13 +34,14 @@
             ));
 
             $result = $req->fetch();
+            // TODO: Check isActiv boolean
             if(empty($result)) {
               echo("<h1>WRONG CREDENTIALS</h1>");
             }
             else 
             {
               $_SESSION['user'] = $result['username'];
-              header('Location: mail.php');
+              header('Location: mailbox.php');
             }
           }
         ?>

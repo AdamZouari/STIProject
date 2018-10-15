@@ -1,0 +1,25 @@
+.active 
+{
+    color: black !important ;
+    font-weight: bold !important;
+    
+}
+
+.hidden-xs 
+{
+    color: white;
+}
+
+.white-box 
+{
+    padding-bottom: 1px;
+}
+a 
+{
+    color: #686868 !important;
+}
+
+a:hover 
+{
+    color: black !important;
+}
