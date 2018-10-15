@@ -5,6 +5,21 @@
     
 }
 
+.btn
+{
+    outline: none !important;   
+}
+
+.white:hover
+{
+    color: white !important;
+}
+
+.pull-left
+{
+    float: left;
+}
+
 .hidden-xs 
 {
     color: white;

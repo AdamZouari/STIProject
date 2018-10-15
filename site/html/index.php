@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Login</title>
+  <title>Postmail - Login</title>
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
 </head>
 
@@ -41,6 +41,7 @@
             else 
             {
               $_SESSION['user'] = $result['username'];
+              $_SESSION['admin'] = true;
               header('Location: mailbox.php');
             }
           }

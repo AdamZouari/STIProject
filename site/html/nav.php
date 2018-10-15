@@ -32,6 +32,15 @@
             <li>
                 <a href="chng_pwd.php" class="waves-effect"><i class="fa fa-unlock-alt fa-fw" aria-hidden="true"></i><span class="hide-menu">Change Password</span></a>
             </li>
+    <?php
+        if ($_SESSION['admin']) {
+    ?>
+            <li>
+                <a href="users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i><span class="hide-menu">Users</span></a>
+            </li>
+    <?php
+        }
+    ?>
             <li>
                 <a href="logout.php" class="waves-effect"><i class="fa fa-power-off fa-fw" aria-hidden="true"></i><span class="hide-menu">Logout</span></a>
             </li>
