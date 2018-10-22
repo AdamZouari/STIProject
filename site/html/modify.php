@@ -1,6 +1,32 @@
 <?php session_start(); ?>
 <?php include 'admin_check.php'; ?>
 <?php include "connect.php"; ?>
+<?php 
+    if (isset($_GET['id']) )  
+    {
+        $req = $db->prepare('
+        SELECT *
+        FROM User
+        WHERE id = :user_id
+      ');
+      $req->execute( array(
+        'user_id' => $_GET['id']
+      ));
+
+      $result = $req->fetch();
+
+      $id = $result['id'];
+      $username = $result['username'];
+      $password = $result['password'];
+      $role = $result['isAdmin'];
+      $state = $result['isActive'];
+    }
+    else 
+    {
+        header("Location: users.php");
+        exit();
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,24 +54,24 @@
                                 <div class="form-group">
                                     <label for="username" class="col-md-12">Username</label>
                                     <div class="col-md-12">
-                                        <input disabled type="text" class="form-control form-control-line" value="Ludwig" id="username"> </div>
+                                        <input disabled type="text" class="form-control form-control-line" value="<?php echo $username; ?>" id="username"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input type="password" value="<?php echo $password; ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Confirm password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input type="password" value="<?php echo $password; ?>" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Role</label>
                                     <div class="col-md-12">
                                         <select name="role" class="form-control form-control-line">
                                             <option value="admin">Admin</option>
-                                            <option selected value="user">User</option>
+                                            <option <?php if($role == 0) { echo "selected "; }?> value="user">User</option>
                                         </select>
                                     </div>
                                 </div>
@@ -54,7 +80,7 @@
                                     <div class="col-md-12">
                                         <select name="role" class="form-control form-control-line">
                                             <option value="active">Active</option>
-                                            <option value="inactive">Inactive</option>
+                                            <option <?php if($state == 0) { echo "selected "; }?> value="inactive">Inactive</option>
                                         </select>
                                     </div>
                                 </div>

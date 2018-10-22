@@ -53,7 +53,7 @@
                                             <td><?php echo $donnee['username']; ?></td>
                                             <td><?php echo ($role = $donnee['isAdmin'] == 1 ? "Admin" : "User"); ?></td>
                                             <td><?php echo ($state = $donnee['isActive'] == 1 ? "Active" : "Inactive"); ?></td>
-                                            <td><a href="modify.php">Modify</a></td>
+                                            <td><a href="modify.php?id=<?php echo $donnee['id']; ?>">Modify</a></td>
                                             <td><a href="delete.php?id=<?php echo $donnee['id']; ?>">Delete</a></td>
                                         </tr>
 
