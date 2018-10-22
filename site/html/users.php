@@ -1,4 +1,6 @@
 <?php session_start(); ?>
+<?php include 'admin_check.php'; ?>
+<?php include "connect.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,21 +43,25 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td>Ludwig</td>
-                                            <td>Admin</td>
-                                            <td>Active</td>
-                                            <td><a href="modify.php">Modify</a></td>
-                                            <td><a href="#">Delete</a></td>
-                                        </tr>
+                                    <?php
+                                        $reponse = $db->query('SELECT username, isAdmin, isActive, id FROM User');
+                                        while($donnee = $reponse->fetch())
+                                        {
+                                    ?>
 
                                         <tr>
-                                            <td>Adam</td>
-                                            <td>User</td>
-                                            <td>Inactive</td>
-                                            <td><a href="#">Modify</a></td>
-                                            <td><a href="#">Delete</a></td>
+                                            <td><?php echo $donnee['username']; ?></td>
+                                            <td><?php echo ($role = $donnee['isAdmin'] == 1 ? "Admin" : "User"); ?></td>
+                                            <td><?php echo ($state = $donnee['isActive'] == 1 ? "Active" : "Inactive"); ?></td>
+                                            <td><a href="modify.php">Modify</a></td>
+                                            <td><a href="delete.php?id=<?php echo $donnee['id']; ?>">Delete</a></td>
                                         </tr>
+
+                                    <?php
+                                        }
+                                        $reponse->closeCursor();
+                                    ?>
+                                        
                                     </tbody>
                                 </table>
                             </div>

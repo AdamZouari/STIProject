@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include "connect.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 

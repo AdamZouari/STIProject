@@ -1,5 +1,7 @@
 <?php session_start(); ?>
-<!DOCTYPE html>
+<?php include 'admin_check.php'; ?>
+<?php include "connect.php"; ?>
+
 <html lang="en">
 
 <head>
@@ -13,11 +15,8 @@
 </head>
 
 <body>
-<?php include "connect.php"; ?>
     <div id="wrapper">
-        <?php include 'nav.php'; ?>
-        <?php include 'admin_check.php'; ?>
-        
+        <?php include 'nav.php'; ?>   
         <!-- Left navbar-header end -->
         <!-- Page Content -->
         <div id="page-wrapper">

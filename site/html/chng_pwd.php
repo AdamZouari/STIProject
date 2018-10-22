@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include "connect.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +14,6 @@
 </head>
 
 <body>
-<?php include "connect.php"; ?>
     <div id="wrapper">
         <!-- Header and Left Menu -->
         <?php include 'nav.php'; ?>

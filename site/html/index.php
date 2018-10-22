@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php include "connect.php"; ?>
 <!DOCTYPE html>
 <html>
 
@@ -17,7 +18,6 @@
   </head>
 
   <body>
-  <?php include "connect.php"; ?>
     <div class="container">
       <div id="login">
         <?php 
