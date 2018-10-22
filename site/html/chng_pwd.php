@@ -37,8 +37,7 @@
                                                 SET password = :new_password
                                                 WHERE id = :user_id
                                             ');
-
-
+                                        
                                             $req->execute(array(
                                                 'new_password' => $_POST['new_password'],
                                                 'user_id' => $_SESSION['id']
