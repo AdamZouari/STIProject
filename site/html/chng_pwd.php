@@ -50,7 +50,7 @@
                                         }
                                         else
                                         {
-                                            echo ("<p>NOUVEAU PASSWORD INCORRECT !</p>");
+                                            echo ("<p>LES NOUVEAUX PASSWORD NE CORRESPONDENT PAS !</p>");
                                         }
                                         
                                     }

@@ -47,7 +47,7 @@
               $_SESSION['user'] = $result['username'];
               $_SESSION['password'] = $result['password'];
               $_SESSION['state'] = $result['isActive'];
-              $_SESSION['admin'] = true;
+              $_SESSION['admin'] = $result['isAdmin'];
               header('Location: mailbox.php');
             }
           }

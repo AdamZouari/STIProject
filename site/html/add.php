@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<?php include "connect.php"; ?>
     <div id="wrapper">
         <?php include 'nav.php'; ?>
         <?php include 'admin_check.php'; ?>
@@ -24,21 +25,59 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                        <?php 
+                            if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) ) {
+                              
+                                if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password2']) ) 
+                                {
+                                    if ($_POST['password'] == $_POST['password2']) 
+                                    {
+                                        $req = $db->prepare('
+                                            INSERT INTO User (username, password, isAdmin, isActive) 
+                                            VALUES (:username, :password, :isAdmin, :isActive)
+                                        ');
+
+                                        // A Changer en switch quand plus d'un rôle ou plus d'un état
+                                        $role = $_POST['role'] == "admin" ? 1 : 0;
+                                        $state = $_POST['state'] == "active" ? 1 : 0;
+                                    
+                                        $req->execute(array(
+                                            'username' => $_POST['username'],
+                                            'password' => $_POST['password'],
+                                            'isAdmin' => $role,
+                                            'isActive' => $state
+                                        ));
+
+                                        echo ("<p>USER AJOUTER !</p>");
+                                    }
+                                    else
+                                    {
+                                        echo ("<p>LES PASSWORD NE CORRESPONDENT PAS!</p>");
+                                    }
+                                    
+                                }
+                                else 
+                                {
+                                    echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                }
+                            
+                            }
+                        ?>
+                            <form method="post" action="add.php" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label for="username" class="col-md-12">Username</label>
                                     <div class="col-md-12">
-                                        <input type="text" class="form-control form-control-line" name="username" id="username"> </div>
+                                        <input type="text" class="form-control form-control-line" name="username" id="username" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="password" class="form-control form-control-line" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Confirm password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="password2" class="form-control form-control-line" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Role</label>
@@ -52,7 +91,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">State</label>
                                     <div class="col-md-12">
-                                        <select name="role" class="form-control form-control-line">
+                                        <select name="state" class="form-control form-control-line">
                                             <option value="active">Active</option>
                                             <option value="inactive">Inactive</option>
                                         </select>
