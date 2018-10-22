@@ -33,8 +33,8 @@
                                             <th>Subject</th>
                                             <th>Date</th>
                                             <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th><?php echo $_SESSION['password']; ?></th>
+                                            <th><?php echo $_SESSION['state']; ?></th>
                                         </tr>
                                     </thead>
 

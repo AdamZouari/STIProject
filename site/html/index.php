@@ -34,13 +34,19 @@
             ));
 
             $result = $req->fetch();
-            // TODO: Check isActiv boolean
+
             if(empty($result)) {
               echo("<h1>WRONG CREDENTIALS</h1>");
             }
-            else 
+            elseif($result['isActive'] == 0) {
+              echo("<h1>Your account has been suspended</h1>");
+            }
+            else
             {
+              $_SESSION['id'] = $result['id'];
               $_SESSION['user'] = $result['username'];
+              $_SESSION['password'] = $result['password'];
+              $_SESSION['state'] = $result['isActive'];
               $_SESSION['admin'] = true;
               header('Location: mailbox.php');
             }

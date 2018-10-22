@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<?php include "connect.php"; ?>
     <div id="wrapper">
         <!-- Header and Left Menu -->
         <?php include 'nav.php'; ?>
@@ -23,24 +24,66 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                        <?php 
+                            if (isset($_POST["password"]) && isset($_POST["new_password"]) && isset($_POST["new_password2"]) ) {
+                                if ($_POST['password'] == $_SESSION['password']) 
+                                {
+                                    if (!empty($_POST['new_password']) && !empty($_POST['new_password2']) ) 
+                                    {
+                                        if ($_POST['new_password'] == $_POST['new_password2']) 
+                                        {
+                                            $req = $db->prepare('
+                                                UPDATE User 
+                                                SET password = :new_password
+                                                WHERE id = :user_id
+                                            ');
+
+
+                                            $req->execute(array(
+                                                'new_password' => $_POST['new_password'],
+                                                'user_id' => $_SESSION['id']
+                                            ));
+
+
+                                            $_SESSION['password'] = $_POST['new_password'];
+
+                                            echo ("<p>PASSWORD MODIFIER !</p>");
+                                        }
+                                        else
+                                        {
+                                            echo ("<p>NOUVEAU PASSWORD INCORRECT !</p>");
+                                        }
+                                        
+                                    }
+                                    else 
+                                    {
+                                        echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                    }
+                                }
+                                else 
+                                {
+                                    echo ("<p>PASSWORD INCORRECT !</p>");    
+                                }
+                            }
+                        ?>
+                            <form action="chng_pwd.php" method="post" class="form-horizontal form-material">
                                 
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" placeholder="Actual password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="password" placeholder="Actual password" class="form-control form-control-line" required> </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-12">New password</label>
                                     <div class="col-md-12">
-                                        <input type="password" placeholder="New password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="new_password" placeholder="New password" class="form-control form-control-line" required> </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-12">Confirm new password</label>
                                     <div class="col-md-12">
-                                        <input type="password" placeholder="New password" class="form-control form-control-line"> </div>
+                                        <input type="password" name="new_password2" placeholder="New password" class="form-control form-control-line" required> </div>
                                 </div>
 
                                 <div class="form-group">
