@@ -40,24 +40,43 @@
                                     </thead>
 
                                     <tbody>
-                                        <tr>
-                                            <td>loic.frueh@gmail.com</td>
-                                            <td>Test d'implémentation</td>
-                                            <td>08-09-2017</td>
-                                            <td><a href="#">Read</a></td>
-                                            <td><a href="#">Respond</a></td>
-                                            <td><a href="#">Delete</a></td>
-                                        </tr>
+
+                                    <?php
+                                        $req = $db->prepare('
+                                            SELECT *
+                                            FROM Message
+                                            WHERE idUser = :user_id
+                                        ');
+                                        $req->execute( array(
+                                            'user_id' => $_SESSION['id'],                            
+                                        ));
+                                        $num_messages = 0;
+                                        while($donnee = $req->fetch())
+                                        {
+                                    ?>
 
                                         <tr>
-                                            <td>adam.ouest@gmail.com</td>
-                                            <td>Implementation Test</td>
-                                            <td>15-05-2017</td>
-                                            <td><a href="#">Read</a></td>
-                                            <td><a href="#">Respond</a></td>
-                                            <td><a href="#">Delete</a></td>
+                                            <td>Loic</td>
+                                            <td><?php echo $donnee['subject']; ?></td>
+                                            <td><?php echo $donnee['date']; ?></td>
+                                            <td><a href="read_mess.php?id=<?php echo $donnee['id']; ?>">Read</a></td>
+                                            <td><a href="new_mess.php?id=<?php echo $donnee['id']; ?>">Respond</a></td>
+                                            <td><a href="delete_mess.php?id=<?php echo $donnee['id']; ?>">Delete</a></td>
                                         </tr>
+
+                                    <?php
+                                        $num_messages += 1;
+                                        }
+
+                                        if ($num_messages == 0) 
+                                        {
+                                            echo "<td>Votre boîte de réception est vide</td>";
+                                        }
+                                        $req->closeCursor();
+                                    ?>
+                                    
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
