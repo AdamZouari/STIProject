@@ -25,7 +25,7 @@
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
                         <?php 
-                            if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) ) {
+                            if (isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && isset($_POST["role"]) && isset($_POST["state"]) ) {
                               
                                 if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['password2']) ) 
                                 {

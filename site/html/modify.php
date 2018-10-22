@@ -50,21 +50,61 @@
                 <div class="row">
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <?php 
+                                if (isset($_POST['password']) && isset($_POST['password2']) && isset($_POST['role']) && isset($_POST['state']) ) {
+
+                                    if (!empty($_POST['password']) && !empty($_POST['password2']) ) 
+                                    {
+                                        if ($_POST['password'] == $_POST['password2']) 
+                                        {
+                                            $req = $db->prepare('
+                                                UPDATE User 
+                                                SET password = :password, isAdmin = :isAdmin, isActive = :isActive
+                                                WHERE id = :user_id 
+                                            ');
+
+                                            // A Changer en switch quand plus d'un rôle ou plus d'un état
+                                            $role = $_POST['role'] == "admin" ? 1 : 0;
+                                            $state = $_POST['state'] == "active" ? 1 : 0;
+                                        
+                                            $req->execute(array(
+                                                'user_id' => $id,
+                                                'password' => $_POST['password'],
+                                                'isAdmin' => $role,
+                                                'isActive' => $state
+                                            ));
+
+                                            header("Location: users.php");
+                                            exit();
+                                        }
+                                        else
+                                        {
+                                            echo ("<p>LES PASSWORD NE CORRESPONDENT PAS!</p>");
+                                        }
+                                        
+                                    }
+                                    else 
+                                    {
+                                        echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                    }
+                                }
+
+                            ?>
+                            <form method="post" action="modify.php?id=<?php echo $id; ?>" class="form-horizontal form-material">
                                 <div class="form-group">
                                     <label for="username" class="col-md-12">Username</label>
                                     <div class="col-md-12">
-                                        <input disabled type="text" class="form-control form-control-line" value="<?php echo $username; ?>" id="username"> </div>
+                                        <input disabled type="text" class="form-control form-control-line" value="<?php echo $username; ?>" id="username" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="<?php echo $password; ?>" class="form-control form-control-line"> </div>
+                                        <input type="password" name="password" value="<?php echo $password; ?>" class="form-control form-control-line" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Confirm password</label>
                                     <div class="col-md-12">
-                                        <input type="password" value="<?php echo $password; ?>" class="form-control form-control-line"> </div>
+                                        <input type="password" name="password2" value="<?php echo $password; ?>" class="form-control form-control-line" required> </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Role</label>
@@ -78,7 +118,7 @@
                                 <div class="form-group">
                                     <label class="col-md-12">State</label>
                                     <div class="col-md-12">
-                                        <select name="role" class="form-control form-control-line">
+                                        <select name="state" class="form-control form-control-line">
                                             <option value="active">Active</option>
                                             <option <?php if($state == 0) { echo "selected "; }?> value="inactive">Inactive</option>
                                         </select>
