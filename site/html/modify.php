@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <input type="submit" value="Upgrade" class="btn btn-success" />
+                                        <input type="submit" value="Update" class="btn btn-success" />
                                     </div>
                                 </div>
                             </form>

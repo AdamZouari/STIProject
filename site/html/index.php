@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <title>Postmail - Login</title>
     <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+    <link rel="stylesheet" href="css/my_style.css" type="text/css" />
 </head>
 
 <body>
@@ -36,10 +37,10 @@
             $result = $req->fetch();
 
             if(empty($result)) {
-              echo("<h1>WRONG CREDENTIALS</h1>");
+              echo('<span class="errors">WRONG CREDENTIALS</span>');
             }
             elseif($result['isActive'] == 0) {
-              echo("<h1>Your account has been suspended</h1>");
+              echo('<span class="errors">Your account has been suspended</span>');
             }
             else
             {
@@ -59,7 +60,6 @@
             <p><input type="submit" value="Sign In"></p>
           </fieldset>
         </form>
-        <p>Not a member? <a href="#">Sign up now</a><span class="fontawesome-arrow-right"></span></p>
       </div> <!-- end login -->
     </div>
   </body>
