@@ -7,12 +7,12 @@
                 $req = $db->prepare('
                     SELECT subject
                     FROM Message
-                    WHERE id = :message_id AND idUser = :id_user
+                    WHERE id = :message_id AND idDest = :id_dest
                 '); // TODO RAJOUTER EXP_ID
 
                 $req->execute( array(
                     'message_id' => $_GET['id'],
-                    'id_user' => $_SESSION['id']
+                    'id_dest' => $_SESSION['id']
 
                 ));
 
@@ -96,15 +96,16 @@
                                         {
                                            
                                             $req = $db->prepare('
-                                                INSERT INTO Message (idUser, date, subject, message) 
-                                                VALUES (:id_user, :date, :subject, :message)
+                                                INSERT INTO Message (idDest, date, subject, message, idExp) 
+                                                VALUES (:id_dest, :date, :subject, :message, :id_exp)
                                             ');
                                         
                                             $req->execute(array(
-                                                'id_user' => $result['id'],
+                                                'id_dest' => $result['id'],
                                                 'date' => date("d M Y - G:i"),
                                                 'subject' => $_POST['subject'],
-                                                'message' => $_POST['message']
+                                                'message' => $_POST['message'],
+                                                'id_exp' => $_SESSION['id']
                                             ));
 
                                             echo ("<p>VOTRE MESSAGE À BIEN ÉTÉ ENVOYÉ !</p>");

@@ -7,12 +7,12 @@
                 $req = $db->prepare('
                     SELECT *
                     FROM Message
-                    WHERE id = :message_id AND idUser = :id_user
+                    WHERE id = :message_id AND idDest = :id_dest
                 ');
 
                 $req->execute( array(
                     'message_id' => $_GET['id'],
-                    'id_user' => $_SESSION['id']
+                    'id_dest' => $_SESSION['id']
                 ));
 
                 $req2 = $db->prepare('
@@ -90,7 +90,7 @@
                                     <thead>
                                         <tr>
                                             <th>Subject</th>
-                                            <th></th>
+                                            <th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,7 +102,6 @@
                                     <thead>
                                         <tr>
                                             <th>Message</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>

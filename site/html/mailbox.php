@@ -46,10 +46,10 @@
                                         $req = $db->prepare('
                                             SELECT *
                                             FROM Message
-                                            WHERE idUser = :user_id
+                                            WHERE idDest = :dest_id
                                         ');
                                         $req->execute( array(
-                                            'user_id' => $_SESSION['id'],                            
+                                            'dest_id' => $_SESSION['id'],                            
                                         ));
                                         $num_messages = 0;
                                         while($donnee = $req->fetch())
@@ -57,7 +57,7 @@
                                     ?>
 
                                         <tr>
-                                            <td>Loic</td>
+                                            <td><?php echo $donnee['username']; ?></td>
                                             <td><?php echo $donnee['subject']; ?></td>
                                             <td><?php echo $donnee['date']; ?></td>
                                             <td><a href="read_mess.php?id=<?php echo $donnee['id']; ?>">Read</a></td>
