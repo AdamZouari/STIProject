@@ -5,6 +5,18 @@
     
 }
 
+.title
+{
+    letter-spacing: 0.02em;
+    text-transform: none;
+    font-size: 1.1em;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
 .btn
 {
     outline: none !important;   
@@ -37,4 +49,15 @@ a
 a:hover 
 {
     color: black !important;
+}
+
+.date
+{
+    text-align: right;
+}
+
+.link
+{
+    color: white !important;
+    margin: 20px 20px 20px 0;
 }
