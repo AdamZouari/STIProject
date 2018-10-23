@@ -113,8 +113,8 @@
 
                                 </table>
                             </div>
-                            <a href="#" class="btn btn-success link">Respond</a>
-                            <a href="#" class="btn-danger btn link">Delete</a>
+                            <a href="new_mess.php?id=<?php echo $id_mess; ?>" class="btn btn-success link">Respond</a>
+                            <a href="delete_mess.php?id=<?php echo $id_mess; ?>" class="btn-danger btn link">Delete</a>
                         </div>
                     </div>
                 </div>
