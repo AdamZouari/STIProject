@@ -1,6 +1,6 @@
 <?php session_start(); ?>
-<?php include 'admin_check.php'; ?>
-<?php include "connect.php"; ?>
+<?php include 'includes/admin_check.php'; ?>
+<?php include 'includes/connect.php'; ?>
 
 <html lang="en">
 
@@ -11,12 +11,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Postmail - Add user</title>
-    <?php include 'link.php'; ?>
+    <?php include 'includes/link.php'; ?>
 </head>
 
 <body>
     <div id="wrapper">
-        <?php include 'nav.php'; ?>   
+        <?php include 'includes/nav.php'; ?>   
         <!-- Left navbar-header end -->
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -112,7 +112,7 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-    <?php include 'scripts.php' ?>
+    <?php include 'includes/scripts.php' ?>
 </body>
 
 </html>

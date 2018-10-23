@@ -1,31 +1,31 @@
 <?php session_start(); ?>
-<?php include 'admin_check.php'; ?>
-<?php include "connect.php"; ?>
+<?php include 'includes/admin_check.php'; ?>
+<?php include 'includes/connect.php'; ?>
 <?php 
-    if (isset($_GET['id']) )  
-    {
-        $req = $db->prepare('
-        SELECT *
-        FROM User
-        WHERE id = :user_id
-      ');
-      $req->execute( array(
-        'user_id' => $_GET['id']
-      ));
+            if (isset($_GET['id']) )  
+            {
+                $req = $db->prepare('
+                SELECT *
+                FROM User
+                WHERE id = :user_id
+            ');
+            $req->execute( array(
+                'user_id' => $_GET['id']
+            ));
 
-      $result = $req->fetch();
+            $result = $req->fetch();
 
-      $id = $result['id'];
-      $username = $result['username'];
-      $password = $result['password'];
-      $role = $result['isAdmin'];
-      $state = $result['isActive'];
-    }
-    else 
-    {
-        header("Location: users.php");
-        exit();
-    }
+            $id = $result['id'];
+            $username = $result['username'];
+            $password = $result['password'];
+            $role = $result['isAdmin'];
+            $state = $result['isActive'];
+            }
+            else 
+            {
+                header("Location: users.php");
+                exit();
+            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +37,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Postmail - Modify user</title>
-    <?php include 'link.php'; ?>
+    <?php include 'includes/link.php'; ?>
 </head>
 
 <body>
     <div id="wrapper">
-        <?php include 'nav.php'; ?>
+        <?php include 'includes/nav.php'; ?>
         <!-- Left navbar-header end -->
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -140,7 +140,7 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-    <?php include 'scripts.php' ?>
+    <?php include 'includes/scripts.php' ?>
 </body>
 
 </html>

@@ -1,5 +1,46 @@
 <?php session_start(); ?>
-<?php include "connect.php"; ?>
+<?php include 'includes/connection_check.php'; ?>
+<?php include 'includes/connect.php'; ?>
+<?php
+            if (isset($_GET['id']) ) 
+            {
+                $req = $db->prepare('
+                    SELECT subject
+                    FROM Message
+                    WHERE id = :message_id AND idUser = :id_user
+                '); // TODO RAJOUTER EXP_ID
+
+                $req->execute( array(
+                    'message_id' => $_GET['id'],
+                    'id_user' => $_SESSION['id']
+
+                ));
+
+                $req2 = $db->prepare('
+                    SELECT username
+                    FROM user
+                    WHERE id = :user_id
+                ');
+
+                $req2->execute( array(
+                    'user_id' => 1,  //TODO: A CHANGER PAR LE BON ID
+                ));
+
+                $result_mess = $req->fetch();
+                $result_user = $req2->fetch();
+
+                if (empty($result_mess) ) 
+                {
+                    header("Location: new_mess.php");
+                    exit();
+                }
+
+                $username = $result_user['username'];
+                $subject = "RE:&nbsp;" . $result_mess['subject'];
+
+            }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,12 +51,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Postmail - New message</title>
-    <?php include 'link.php'; ?>
+    <?php include 'includes/link.php'; ?>
 </head>
 
 <body>
     <div id="wrapper">
-        <?php include 'nav.php'; ?>
+        <?php include 'includes/nav.php'; ?>
         <!-- Left navbar-header end -->
         <!-- Page Content -->
         <div id="page-wrapper">
@@ -83,13 +124,13 @@
                                 <div class="form-group">
                                     <label for="to" class="col-md-12">To</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="to" placeholder="Username" class="form-control form-control-line" id="to" required> 
+                                        <input type="text" name="to" <?php if(isset($_GET['id'])) { echo "value=" . $username; } ?> placeholder="Username" class="form-control form-control-line" id="to" required> 
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Subject</label>
                                     <div class="col-md-12">
-                                        <input type="text" name="subject" class="form-control form-control-line" required> 
+                                        <input type="text" name="subject" <?php if(isset($_GET['id'])) { echo "value=" . $subject; } ?> class="form-control form-control-line" required> 
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -115,7 +156,7 @@
         </div>
         <!-- /#page-wrapper -->
     </div>
-    <?php include 'scripts.php' ?>
+    <?php include 'includes/scripts.php' ?>
 </body>
 
 </html>

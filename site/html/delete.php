@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include 'admin_check.php';
-    include 'connect.php';
+    include 'includes/admin_check.php';
+    include 'includes/connect.php';
 
     if (isset($_GET['id']) ) 
     {

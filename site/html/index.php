@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php include "connect.php"; ?>
+<?php include 'includes/connect.php'; ?>
 <!DOCTYPE html>
 <html>
 
