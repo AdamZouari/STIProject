@@ -44,9 +44,11 @@
 
                                     <?php
                                         $req = $db->prepare('
-                                            SELECT *
+                                            SELECT username, subject, date, Message.id
                                             FROM Message
+                                            INNER JOIN User ON Message.idExp = User.id
                                             WHERE idDest = :dest_id
+                                            ORDER BY date DESC
                                         ');
                                         $req->execute( array(
                                             'dest_id' => $_SESSION['id'],                            
@@ -54,12 +56,13 @@
                                         $num_messages = 0;
                                         while($donnee = $req->fetch())
                                         {
+
                                     ?>
 
                                         <tr>
                                             <td><?php echo $donnee['username']; ?></td>
                                             <td><?php echo $donnee['subject']; ?></td>
-                                            <td><?php echo $donnee['date']; ?></td>
+                                            <td><?php echo date("d M Y - G:i", $donnee['date']); ?></td>
                                             <td><a href="read_mess.php?id=<?php echo $donnee['id']; ?>">Read</a></td>
                                             <td><a href="new_mess.php?id=<?php echo $donnee['id']; ?>">Respond</a></td>
                                             <td><a href="delete_mess.php?id=<?php echo $donnee['id']; ?>">Delete</a></td>

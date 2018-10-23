@@ -15,6 +15,8 @@
                     'id_dest' => $_SESSION['id']
                 ));
 
+                $result_mess = $req->fetch();
+
                 $req2 = $db->prepare('
                     SELECT username
                     FROM user
@@ -22,10 +24,10 @@
                 ');
 
                 $req2->execute( array(
-                    'user_id' => 1,  //TODO: A CHANGER PAR LE BON ID
+                    'user_id' => $result_mess['idExp'],
                 ));
 
-                $result_mess = $req->fetch();
+               
                 $result_user = $req2->fetch();
 
                 if (empty($result_mess) ) 
@@ -38,7 +40,7 @@
                 $from = $result_user['username'];
                 $subject = $result_mess['subject'];
                 $message = $result_mess['message'];
-                $date = $result_mess['date'];
+                $date = date("d M Y - G:i", $result_mess['date']);
             }
             else 
             {
@@ -90,7 +92,7 @@
                                     <thead>
                                         <tr>
                                             <th>Subject</th>
-                                            <th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -102,11 +104,12 @@
                                     <thead>
                                         <tr>
                                             <th>Message</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><?php echo $message; ?></td>
+                                            <td><?php echo nl2br($message); ?></td>
                                         </tr>                
                                     </tbody>
 

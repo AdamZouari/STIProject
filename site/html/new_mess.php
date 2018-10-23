@@ -5,16 +5,18 @@
             if (isset($_GET['id']) ) 
             {
                 $req = $db->prepare('
-                    SELECT subject
+                    SELECT subject, idExp
                     FROM Message
                     WHERE id = :message_id AND idDest = :id_dest
-                '); // TODO RAJOUTER EXP_ID
+                ');
 
                 $req->execute( array(
                     'message_id' => $_GET['id'],
                     'id_dest' => $_SESSION['id']
 
                 ));
+
+                $result_mess = $req->fetch();
 
                 $req2 = $db->prepare('
                     SELECT username
@@ -23,10 +25,10 @@
                 ');
 
                 $req2->execute( array(
-                    'user_id' => 1,  //TODO: A CHANGER PAR LE BON ID
+                    'user_id' => $result_mess['idExp'],  //TODO: A CHANGER PAR LE BON ID
                 ));
 
-                $result_mess = $req->fetch();
+               
                 $result_user = $req2->fetch();
 
                 if (empty($result_mess) ) 
@@ -102,7 +104,7 @@
                                         
                                             $req->execute(array(
                                                 'id_dest' => $result['id'],
-                                                'date' => date("d M Y - G:i"),
+                                                'date' => time(),
                                                 'subject' => $_POST['subject'],
                                                 'message' => $_POST['message'],
                                                 'id_exp' => $_SESSION['id']
