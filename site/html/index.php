@@ -37,10 +37,10 @@
             $result = $req->fetch();
 
             if(empty($result)) {
-              echo('<span class="errors">WRONG CREDENTIALS</span>');
+              echo('<span class="errors">WRONG CREDENTIALS !</span>');
             }
             elseif($result['isActive'] == 0) {
-              echo('<span class="errors">Your account has been suspended</span>');
+              echo('<span class="errors">YOUR ACCOUNT HAS BEEN SUSPENDED !/span>');
             }
             else
             {

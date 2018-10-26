@@ -110,14 +110,14 @@
                                                 'id_exp' => $_SESSION['id']
                                             ));
 
-                                            echo ("<p>VOTRE MESSAGE À BIEN ÉTÉ ENVOYÉ !</p>");
+                                            echo ("<p>YOUR MAIL HAS BEEN SENT !</p>");
 
                                         }
                                         
                                     }
                                     else 
                                     {
-                                        echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                        echo ("<p>ALL FIELDS MUST BE FILLED !</p>");
                                     }
 
                                 }

@@ -51,18 +51,18 @@
                                         }
                                         else
                                         {
-                                            echo ("<p>LES NOUVEAUX PASSWORD NE CORRESPONDENT PAS !</p>");
+                                            echo ("<p>THE PASSWORDS ARE DIFFERENT !</p>");
                                         }
                                         
                                     }
                                     else 
                                     {
-                                        echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                        echo ("<p>ALL FIELDS MUST BE FILLED !</p>");
                                     }
                                 }
                                 else 
                                 {
-                                    echo ("<p>PASSWORD INCORRECT !</p>");    
+                                    echo ("<p>INCORRECT PASSWORD !</p>");    
                                 }
                             }
                         ?>

@@ -47,17 +47,17 @@
                                             'isActive' => $state
                                         ));
 
-                                        echo ("<p>USER AJOUTER !</p>");
+                                        echo ("<p>USER ADDED !</p>");
                                     }
                                     else
                                     {
-                                        echo ("<p>LES PASSWORD NE CORRESPONDENT PAS!</p>");
+                                        echo ("<p>THE PASSWORDS ARE DIFFERENT !</p>");
                                     }
                                     
                                 }
                                 else 
                                 {
-                                    echo ("<p>TOUS LES CHAMPS DOIVENT ÊTRE REMPLI !</p>");
+                                    echo ("<p>ALL FIELDS MUST BE FILLED !</p>");
                                 }
                             
                             }

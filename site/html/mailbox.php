@@ -74,7 +74,7 @@
 
                                         if ($num_messages == 0) 
                                         {
-                                            echo "<td>Votre boîte de réception est vide</td>";
+                                            echo "<td>Your mailbox is empty.</td>";
                                         }
                                         $req->closeCursor();
                                     ?>
