@@ -47,7 +47,7 @@
 
                                             $_SESSION['password'] = $_POST['new_password'];
 
-                                            echo ("<p>PASSWORD MODIFIER !</p>");
+                                            echo ("<p>YOUR PASSWORD HAS BEEN MODIFIED !</p>");
                                         }
                                         else
                                         {

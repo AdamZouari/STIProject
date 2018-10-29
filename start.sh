@@ -9,5 +9,5 @@ sudo docker exec -u root sti_project service nginx start
 sudo docker exec -u root sti_project service php5-fpm start
 sudo docker exec -u root sti_project chmod a+wx /usr/share/nginx/databases /usr/share/nginx/databases/db.sqlite
 
-echo "Web interface PostMail launching ..."
+echo "Web interface PostMail launching on localhost port 8080..."
 xdg-open localhost:8080 &
