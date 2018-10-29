@@ -12,5 +12,5 @@ You will be redirect on the Login page.
 
 Credentials of pre-configurated users : 
 
-Admin - Admin
-User - User
+- Admin - Admin
+- User - User
